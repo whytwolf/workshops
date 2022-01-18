@@ -10,7 +10,18 @@ unless os.windows?
   end
 end
 
-# This is an example test, replace it with your own test.
-describe port(80), :skip do
-  it { should_not be_listening }
+# Check that the mongo application exists.
+describe file('/usr/bin/mongo'), do
+  it { should exist }
+  it { should be_executable }
+end
+
+# Check for the mongod process.
+describe processes('mongod') do
+  it { should exist }
+end
+
+# Is MongoDB listening on the correct port?
+describe port(27017) do
+  it { should be_listening }
 end

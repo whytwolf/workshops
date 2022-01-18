@@ -10,7 +10,15 @@ unless os.windows?
   end
 end
 
-# This is an example test, replace it with your own test.
-describe port(80), :skip do
-  it { should_not be_listening }
+# Check selinux status. For our purposes a Permissive state is ok.
+describe selinux do
+  it { should be_installed }
+  it { should_not be_disabled }
+end
+
+# Verify that the mongodb_cgroup_memory module is installed.
+describe selinux.modules.where('mongodb_cgroup_memory') do
+  it { shoud_exist }
+  it { should be_installed }
+  it { should be_enabled }
 end
