@@ -7,9 +7,9 @@
 # Create the MongoDB repository.
 yum_repository 'mongodb' do
   description 'MongoDB Repository'
-  baseurl 'https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/5.0/x86_64/'
+  baseurl 'https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/4.4/x86_64/'
   gpgcheck true
-  gpgkey 'https://www.mongodb.org/static/pgp/server-5.0.asc'
+  gpgkey 'https://www.mongodb.org/static/pgp/server-4.4.asc'
   enabled true
 end
 
