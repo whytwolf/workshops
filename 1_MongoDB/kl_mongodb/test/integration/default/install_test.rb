@@ -3,15 +3,8 @@
 # The Chef InSpec reference, with examples and extensive documentation, can be
 # found at https://docs.chef.io/inspec/resources/
 
-unless os.windows?
-  # This is an example test, replace with your own test.
-  describe user('root'), :skip do
-    it { should exist }
-  end
-end
-
 # Check that the mongo application exists.
-describe file('/usr/bin/mongo'), do
+describe file('/usr/bin/mongo') do
   it { should exist }
   it { should be_executable }
 end
