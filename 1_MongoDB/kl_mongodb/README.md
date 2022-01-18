@@ -15,7 +15,7 @@ If chef is not installed on the VM install it with the command `sudo yum -y inst
 Change directory into the extracted cookbook directory.
 
 Run `sudo chef-client -z`
-
+*Accept the license if prompted
 
 ## Notes
 This cookbook was built for Redhat/CentOS variants running version 7 or later.
