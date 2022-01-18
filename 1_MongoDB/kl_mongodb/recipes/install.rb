@@ -7,7 +7,7 @@
 # Create the MongoDB repository.
 yum_repository 'mongodb' do
   description 'MongoDB Repository'
-  baseurl 'http://downloads-distro.mongodb.org/repo/redhat/os/x86_64/'
+  baseurl 'https://downloads-distro.mongodb.org/repo/redhat/os/x86_64/'
   gpgcheck false
   enabled true
 end
