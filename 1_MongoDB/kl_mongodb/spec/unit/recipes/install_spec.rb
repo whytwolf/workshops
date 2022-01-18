@@ -25,8 +25,8 @@ describe 'kl_mongodb::install' do
     end
 
     it 'enables and starts the mongodb service' do
-      expect(chef_run).to enable_service('mongodb')
-      expect(chef_run).to start_service('mongodb')
+      expect(chef_run).to enable_service('mongod')
+      expect(chef_run).to start_service('mongod')
     end
   end
 end

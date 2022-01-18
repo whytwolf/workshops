@@ -6,13 +6,13 @@
 
 yum_repository 'mongodb' do
   description 'MongoDB Repository'
-  baseurl http://downloads-distro.mongodb.org/repo/redhat/os/x86_64/
+  baseurl 'http://downloads-distro.mongodb.org/repo/redhat/os/x86_64/'
   gpgcheck false
   enabled true
 end
 
 package 'mongodb-org'
 
-service 'mongod'
+service 'mongod' do
   action [:enable, :start]
 end
