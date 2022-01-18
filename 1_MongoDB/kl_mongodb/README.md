@@ -20,4 +20,4 @@ Run `sudo chef-client -z`
 ## Notes
 This cookbook was built for Redhat/CentOS variants running version 7 or later.
 
-The cookbook has a dependency on the community `selinux` cookbook, and was exported using the `chef export` command to satisfy the dependencies in a Chef Zero environment.
+The cookbook has a dependency on the community `selinux` cookbook, and was exported using `chef export` to satisfy the dependencies in a Chef Zero environment.
