@@ -7,23 +7,26 @@
 require 'spec_helper'
 
 describe 'kl_mongodb::install' do
-  context 'When all attributes are default, on Ubuntu 20.04' do
+  context 'When all attributes are default, on CentOS 7' do
     # for a complete list of available platforms and versions see:
     # https://github.com/chefspec/fauxhai/blob/main/PLATFORMS.md
-    platform 'ubuntu', '20.04'
+    platform 'centos', '7'
 
     it 'converges successfully' do
       expect { chef_run }.to_not raise_error
     end
-  end
 
-  context 'When all attributes are default, on CentOS 8' do
-    # for a complete list of available platforms and versions see:
-    # https://github.com/chefspec/fauxhai/blob/main/PLATFORMS.md
-    platform 'centos', '8'
+    it 'creates a yum repository' do
+      expect(chef_run).to create_yum_repository('mongodb')
+    end
 
-    it 'converges successfully' do
-      expect { chef_run }.to_not raise_error
+    it 'installs the mongodb packages' do
+      expect(chef_run).to install_package('mongodb-org')
+    end
+
+    it 'enables and starts the mongodb service' do
+      expect(chef_run).to enable_service('mongodb')
+      expect(chef_run).to start_service('mongodb')
     end
   end
 end
