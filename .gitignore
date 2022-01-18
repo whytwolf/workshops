@@ -1,0 +1,5 @@
+.kitchen/*
+*.sw[a-z]
+.vscode
+.vagrant
+Vagrantfile
