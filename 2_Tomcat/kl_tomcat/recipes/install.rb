@@ -4,42 +4,49 @@
 #
 # Copyright:: 2022, The Authors, All Rights Reserved.
 
+tomcat_group = node['kl_tomcat']['group']
+tomcat_user = node['kl_tomcat']['user']
+tomcat_path = node['kl_tomcat']['tomcat_path']
+tomcat_archive = node['kl_tomcat']['tomcat_archive']
+
 # Install the JDK.
-package 'java-1.7.0-openjdk-devel'
+package node['kl_tomcat']['jdk_package']
 
 # Create the tomcat group and user.
-group 'tomcat'
+group tomcat_group
 
 user 'tomcat' do
-  gid 'tomcat'
+  gid tomcat_group
   shell '/sbin/nologin'
-  home '/opt/tomcat'
-end
-
-# Download the Tomcat binaries from apache.org.
-remote_file 'apache-tomcat-8.5.73.tar.gz' do
-  source 'https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.73/bin/apache-tomcat-8.5.73.tar.gz'
-  path '/tmp/apache-tomcat-8.5.73.tar.gz'
+  home tomcat_path
 end
 
 # Extract the binaries to /opt/tomcat.
 # Use the 'strip_components' property to extract the archive to /opt/tomcat instead of /opt/tomcat/<archive>.
-archive_file 'apache-tomcat-8.5.73.tar.gz' do
-  path '/tmp/apache-tomcat-8.5.73.tar.gz'
-  destination '/opt/tomcat'
-  owner 'tomcat'
-  group 'tomcat'
+archive_file tomcat_archive do
+  path "/tmp/#{tomcat_archive}"
+  destination tomcat_path
+  owner tomcat_user
+  group tomcat_group
   strip_components 1
+  action :nothing
+end
+
+# Download the Tomcat binaries from apache.org.
+remote_file tomcat_archive do
+  source node['kl_tomcat']['tomcat_archive_source']
+  path "/tmp/#{tomcat_archive}"
+  notifies :extract, "archive_file[#{tomcat_archive}]", :immediate
 end
 
 # Ensure that the owner of /opt/tomcat is tomcat:tomcat.
-directory '/opt/tomcat' do
-  owner 'tomcat'
-  group 'tomcat'
+directory tomcat_path do
+  owner tomcat_user
+  group tomcat_group
 end
 
 # Uodate permissions on the /opt/tomcat/conf directory to allow group read and execute.
-directory '/opt/tomcat/conf' do
+directory "#{tomcat_path}/conf" do
   mode '0750'
   recursive true
 end
@@ -47,7 +54,7 @@ end
 # Create the tomcat.service systemd unit file.
 systemd_unit 'tomcat.service' do
   content({
-      Unit: {
+    Unit: {
         Description: 'Apache Tomcat Web Application Container',
         After: 'syslog.target network.target',
       },

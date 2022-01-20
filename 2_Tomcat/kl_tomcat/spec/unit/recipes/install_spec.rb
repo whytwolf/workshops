@@ -7,7 +7,20 @@
 require 'spec_helper'
 
 describe 'kl_tomcat::install' do
-  context 'When all attributes are default, on CentOS 8' do
+  default_attributes['kl_tomcat']['tomcat_version']         = '8.5.73'
+  default_attributes['kl_tomcat']['jdk_version']            = '1.7.0'
+  default_attributes['kl_tomcat']['tomcat_path']            = '/opt/tomcat'
+  default_attributes['kl_tomcat']['user']                   = 'tomcat'
+  default_attributes['kl_tomcat']['group']                  = 'tomcat'
+  default_attributes['kl_tomcat']['tomcat_archive']         = "apache-tomcat-#{default_attributes['kl_tomcat']['tomcat_version']}.tar.gz"
+  default_attributes['kl_tomcat']['jdk_package']            = "java-#{default_attributes['kl_tomcat']['jdk_version']}-openjdk-devel"
+  
+  default_attributes['kl_tomcat']['tomcat_archive_source']  = 'https://archive.apache.org/dist/tomcat/'
+  default_attributes['kl_tomcat']['tomcat_archive_source']  += "tomcat-#{default_attributes['kl_tomcat']['tomcat_version'][0]}/"
+  default_attributes['kl_tomcat']['tomcat_archive_source']  += "v#{default_attributes['kl_tomcat']['tomcat_version']}/bin/"
+  default_attributes['kl_tomcat']['tomcat_archive_source']  += "apache-tomcat-#{default_attributes['kl_tomcat']['tomcat_version']}.tar.gz"
+  
+  context 'When all attributes are default, on CentOS 7' do
     # for a complete list of available platforms and versions see:
     # https://github.com/chefspec/fauxhai/blob/main/PLATFORMS.md
     platform 'centos', '7'
@@ -28,19 +41,21 @@ describe 'kl_tomcat::install' do
       expect(chef_run).to create_user('tomcat')
     end
 
-    it 'downloads the tomcat binaries to /tmp' do
-      expect(chef_run).to create_remote_file('apache-tomcat-8.5.73.tar.gz').with(
-        path: '/tmp/apache-tomcat-8.5.73.tar.gz'
-      )
-    end
-
     it 'extracts the tomcat binaries to /opt/tomcat' do
-      expect(chef_run).to extract_archive_file('apache-tomcat-8.5.73.tar.gz').with(
+      expect(chef_run).to nothing_archive_file('apache-tomcat-8.5.73.tar.gz').with(
         destination: '/opt/tomcat',
         owner: 'tomcat',
         group: 'tomcat',
         strip_components: 1
       )
+    end
+
+    it 'downloads the tomcat binaries to /tmp' do
+      expect(chef_run).to create_remote_file('apache-tomcat-8.5.73.tar.gz').with(
+        path: '/tmp/apache-tomcat-8.5.73.tar.gz'
+      )
+      remote_file = chef_run.remote_file('apache-tomcat-8.5.73.tar.gz')
+      expect(remote_file).to notify("archive_file[apache-tomcat-8.5.73.tar.gz]")
     end
 
     it 'updates the permissions on directory /opt/tomcat/conf' do
@@ -52,7 +67,7 @@ describe 'kl_tomcat::install' do
 
     it 'creates the tomcat.service systemd file' do
       expect(chef_run).to create_systemd_unit('tomcat.service').with(
-        content: {
+        content: ({
             Unit: {
               Description: 'Apache Tomcat Web Application Container',
               After: 'syslog.target network.target',
@@ -79,6 +94,7 @@ describe 'kl_tomcat::install' do
               WantedBy: 'multi-user.target',
             },
           }
+        )
       )
     end
 
