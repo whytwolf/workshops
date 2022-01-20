@@ -29,7 +29,9 @@ describe 'kl_tomcat::install' do
     end
 
     it 'downloads the tomcat binaries to /tmp' do
-      expect(chef_run).to create_remote_file('/tmp/apache-tomcat-8.5.73.tar.gz')
+      expect(chef_run).to create_remote_file('apache-tomcat-8.5.73.tar.gz').with(
+        path: '/tmp/apache-tomcat-8.5.73.tar.gz'
+      )
     end
 
     it 'extracts the tomcat binaries to /opt/tomcat' do
@@ -37,23 +39,23 @@ describe 'kl_tomcat::install' do
         destination: '/opt/tomcat',
         owner: 'tomcat',
         group: 'tomcat',
-        strip_components: 1,
+        strip_components: 1
       )
     end
 
     it 'updates the permissions on directory /opt/tomcat/conf' do
       expect(chef_run).to create_directory('/opt/tomcat/conf').with(
         mode: '0750',
-        recursive: true,
+        recursive: true
       )
     end
 
     it 'creates the tomcat.service systemd file' do
       expect(chef_run).to create_systemd_unit('tomcat.service').with(
-        content:({
+        content: {
             Unit: {
               Description: 'Apache Tomcat Web Application Container',
-              After: 'syslog.target network.target'
+              After: 'syslog.target network.target',
             },
               Service: {
               Type: 'forking',
@@ -63,7 +65,7 @@ describe 'kl_tomcat::install' do
                 "'CATALINA_HOME=/opt/tomcat'",
                 "'CATALINA_BASE=/opt/tomcat'",
                 "'CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC'",
-                "'JAVA_OPTS=-Djava.awt.headless=true -Djava.security.egd=file:/dev/./urandom'"
+                "'JAVA_OPTS=-Djava.awt.headless=true -Djava.security.egd=file:/dev/./urandom'",
               ],
               ExecStart: '/opt/tomcat/bin/startup.sh',
               ExecStop: '/bin/kill -15 $MAINPID',
@@ -71,13 +73,12 @@ describe 'kl_tomcat::install' do
               Group: 'tomcat',
               UMask: '0007',
               RestartSec: '10',
-              Restart: 'always'
+              Restart: 'always',
             },
             Install: {
-              WantedBy: 'multi-user.target'
-            }
+              WantedBy: 'multi-user.target',
+            },
           }
-        )
       )
     end
 

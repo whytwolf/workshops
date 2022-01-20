@@ -17,8 +17,9 @@ user 'tomcat' do
 end
 
 # Download the Tomcat binaries from apache.org.
-remote_file '/tmp/apache-tomcat-8.5.73.tar.gz' do
+remote_file 'apache-tomcat-8.5.73.tar.gz' do
   source 'https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.73/bin/apache-tomcat-8.5.73.tar.gz'
+  path '/tmp/apache-tomcat-8.5.73.tar.gz'
 end
 
 # Extract the binaries to /opt/tomcat.
@@ -48,7 +49,7 @@ systemd_unit 'tomcat.service' do
   content({
       Unit: {
         Description: 'Apache Tomcat Web Application Container',
-        After: 'syslog.target network.target'
+        After: 'syslog.target network.target',
       },
         Service: {
         Type: 'forking',
@@ -58,7 +59,7 @@ systemd_unit 'tomcat.service' do
           "'CATALINA_HOME=/opt/tomcat'",
           "'CATALINA_BASE=/opt/tomcat'",
           "'CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC'",
-          "'JAVA_OPTS=-Djava.awt.headless=true -Djava.security.egd=file:/dev/./urandom'"
+          "'JAVA_OPTS=-Djava.awt.headless=true -Djava.security.egd=file:/dev/./urandom'",
         ],
         ExecStart: '/opt/tomcat/bin/startup.sh',
         ExecStop: '/bin/kill -15 $MAINPID',
@@ -66,11 +67,11 @@ systemd_unit 'tomcat.service' do
         Group: 'tomcat',
         UMask: '0007',
         RestartSec: '10',
-        Restart: 'always'
+        Restart: 'always',
       },
       Install: {
-        WantedBy: 'multi-user.target'
-      }
+        WantedBy: 'multi-user.target',
+      },
     }
   )
   action :create

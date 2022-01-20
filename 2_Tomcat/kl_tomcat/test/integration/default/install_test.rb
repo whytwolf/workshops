@@ -27,3 +27,9 @@ end
 describe port(8080) do
   it { should be_listening }
 end
+
+# Verify that Tomcat is running on port 8080.
+describe command('curl http://localhost:8080') do
+  its('stdout') { should match (/Apache Tomcat/) }
+  its('exit_status') { should eq 0 }
+end
