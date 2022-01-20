@@ -3,14 +3,27 @@
 # The Chef InSpec reference, with examples and extensive documentation, can be
 # found at https://docs.chef.io/inspec/resources/
 
-unless os.windows?
-  # This is an example test, replace with your own test.
-  describe user('root'), :skip do
-    it { should exist }
-  end
+# The tomcat directory should exist.
+describe directory('/opt/tomcat') do
+  it { should exist }
+  its('owner') { should eq 'tomcat' }
+  its('group') { should eq 'tomcat' }
 end
 
-# This is an example test, replace it with your own test.
-describe port(80), :skip do
-  it { should_not be_listening }
+# The tomcat conf directory should have proper permissions.
+describe directory('/opt/tomcat/conf') do
+  it { should exist }
+  its('owner') { should eq 'tomcat' }
+  its('group') { should eq 'tomcat' }
+  its('mode') { should eq '0750' }
+end
+
+# The tomcat service should be running
+describe service('tomcat') do
+  it { should be_running }
+end
+
+# We should be listening on port 8080.
+describe port(8080) do
+  it { should be_listening }
 end

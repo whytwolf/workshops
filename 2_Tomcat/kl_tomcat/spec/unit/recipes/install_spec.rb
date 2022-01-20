@@ -46,7 +46,7 @@ describe 'kl_tomcat::install' do
 
     it 'updates the permissions on directory /opt/tomcat/conf' do
       expect(chef_run).to create_directory('/opt/tomcat/conf').with(
-        mode: '0770',
+        mode: '0750',
         recursive: true,
       )
     end
