@@ -15,7 +15,7 @@ describe directory('/opt/tomcat/conf') do
   it { should exist }
   its('owner') { should eq 'tomcat' }
   its('group') { should eq 'tomcat' }
-  its('mode') { should eq '0750' }
+  its('mode') { should cmp '0750' }
 end
 
 # The tomcat service should be running

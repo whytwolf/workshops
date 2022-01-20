@@ -37,6 +37,7 @@ describe 'kl_tomcat::install' do
         destination: '/opt/tomcat',
         owner: 'tomcat',
         group: 'tomcat',
+        strip_components: 1,
       )
     end
 

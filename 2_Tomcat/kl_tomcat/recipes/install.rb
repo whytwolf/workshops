@@ -4,8 +4,10 @@
 #
 # Copyright:: 2022, The Authors, All Rights Reserved.
 
+# Install the JDK.
 package 'java-1.7.0-openjdk-devel'
 
+# Create the tomcat group and user.
 group 'tomcat'
 
 user 'tomcat' do
@@ -14,22 +16,34 @@ user 'tomcat' do
   home '/opt/tomcat'
 end
 
+# Download the Tomcat binaries from apache.org.
 remote_file '/tmp/apache-tomcat-8.5.73.tar.gz' do
   source 'https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.73/bin/apache-tomcat-8.5.73.tar.gz'
 end
 
+# Extract the binaries to /opt/tomcat.
+# Use the 'strip_components' property to extract the archive to /opt/tomcat instead of /opt/tomcat/<archive>.
 archive_file 'apache-tomcat-8.5.73.tar.gz' do
   path '/tmp/apache-tomcat-8.5.73.tar.gz'
   destination '/opt/tomcat'
   owner 'tomcat'
   group 'tomcat'
+  strip_components 1
 end
 
+# Ensure that the owner of /opt/tomcat is tomcat:tomcat.
+directory '/opt/tomcat' do
+  owner 'tomcat'
+  group 'tomcat'
+end
+
+# Uodate permissions on the /opt/tomcat/conf directory to allow group read and execute.
 directory '/opt/tomcat/conf' do
   mode '0750'
   recursive true
 end
 
+# Create the tomcat.service systemd unit file.
 systemd_unit 'tomcat.service' do
   content({
       Unit: {
@@ -62,6 +76,7 @@ systemd_unit 'tomcat.service' do
   action :create
 end
 
+# Enable and start the tomcat service.
 service 'tomcat' do
   action [:enable, :start]
 end
