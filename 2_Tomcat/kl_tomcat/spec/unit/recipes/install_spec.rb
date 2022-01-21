@@ -21,13 +21,13 @@ describe 'kl_tomcat::install' do
   default_attributes['kl_tomcat']['tomcat_archive_source']  += "apache-tomcat-#{default_attributes['kl_tomcat']['tomcat_version']}.tar.gz"
 
   default_attributes['kl_tomcat']['tomcat_service'] = {
-                                                        Unit: {
-                                                          Description: 'Apache Tomcat Web Application Container',
-                                                          After: 'syslog.target network.target',
+                                                        'Unit': {
+                                                          'Description': 'Apache Tomcat Web Application Container',
+                                                          'After': 'syslog.target network.target',
                                                         },
-                                                          Service: {
-                                                          Type: 'forking',
-                                                          Environment: [
+                                                        'Service': {
+                                                          'Type': 'forking',
+                                                          'Environment': [
                                                             "'JAVA_HOME=/usr/lib/jvm/jre'",
                                                             "'CATALINA_PID=/opt/tomcat/temp/tomcat.pid'",
                                                             "'CATALINA_HOME=/opt/tomcat'",
@@ -35,16 +35,16 @@ describe 'kl_tomcat::install' do
                                                             "'CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC'",
                                                             "'JAVA_OPTS=-Djava.awt.headless=true -Djava.security.egd=file:/dev/./urandom'",
                                                           ],
-                                                          ExecStart: '/opt/tomcat/bin/startup.sh',
-                                                          ExecStop: '/bin/kill -15 $MAINPID',
-                                                          User: 'tomcat',
-                                                          Group: 'tomcat',
-                                                          UMask: '0007',
-                                                          RestartSec: '10',
-                                                          Restart: 'always',
+                                                          'ExecStart': '/opt/tomcat/bin/startup.sh',
+                                                          'ExecStop': '/bin/kill -15 $MAINPID',
+                                                          'User': 'tomcat',
+                                                          'Group': 'tomcat',
+                                                          'UMask': '0007',
+                                                          'RestartSec': '10',
+                                                          'Restart': 'always',
                                                         },
-                                                        Install: {
-                                                          WantedBy: 'multi-user.target',
+                                                        'Install': {
+                                                          'WantedBy': 'multi-user.target',
                                                         },
                                                       }
 
@@ -93,7 +93,7 @@ describe 'kl_tomcat::install' do
       )
     end
 
-    # Rspec expects the hash keys to be quoted strings instead of symbols.
+    # Rspec expects the hash keys and values separted by '=>' instead of ':'.
     it 'creates the tomcat.service systemd file' do
       expect(chef_run).to create_systemd_unit('tomcat.service').with(
         content: {
@@ -101,7 +101,7 @@ describe 'kl_tomcat::install' do
               'Description' => 'Apache Tomcat Web Application Container',
               'After' => 'syslog.target network.target',
             },
-              'Service' => {
+            'Service' => {
               'Type' => 'forking',
               'Environment' => [
                 "'JAVA_HOME=/usr/lib/jvm/jre'",
