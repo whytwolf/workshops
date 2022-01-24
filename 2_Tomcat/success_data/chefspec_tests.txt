@@ -1,0 +1,5 @@
+klewis@LAPTOP-A0NGHDDI:~/chef/chef-sft/workshops/2_Tomcat/kl_tomcat$ chef exec rspec
+.........
+
+Finished in 6.02 seconds (files took 1.78 seconds to load)
+9 examples, 0 failures

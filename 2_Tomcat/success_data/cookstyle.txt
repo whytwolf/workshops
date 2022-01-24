@@ -1,0 +1,5 @@
+klewis@LAPTOP-A0NGHDDI:~/chef/chef-sft/workshops/2_Tomcat/kl_tomcat$ cookstyle
+Inspecting 9 files
+.........
+
+9 files inspected, no offenses detected
