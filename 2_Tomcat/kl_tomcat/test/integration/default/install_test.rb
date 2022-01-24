@@ -21,7 +21,8 @@ end
 # The tomcat service file should exist.
 describe file('/etc/systemd/system/tomcat.service') do
   it { should exist }
-  its('content') { should eq <<-EOS
+  its('content') do
+    should eq <<-EOS
 [Unit]
 Description=Apache Tomcat Web Application Container
 After=syslog.target network.target
@@ -45,11 +46,7 @@ Restart=always
 [Install]
 WantedBy=multi-user.target
 EOS
-                 }
-  #its('content') { should match(/Environment='JAVA_HOME=\/usr\/lib\/jvm\/jre'/) }
-  #its('content') { should match(/Environment='CATALINA_[PID|HOME|BASE]=\/opt\/tomcat/) }
-  #its('content') { should match(/Environment='CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC'/) }
-  #its('content') { should match(/Environment='JAVA_OPTS=-Djava\.awt\.headless=true -Djava\.security\.egd=file:\/dev\/\.\/urandom'/) }
+  end
 end
 
 # The tomcat service should be running
