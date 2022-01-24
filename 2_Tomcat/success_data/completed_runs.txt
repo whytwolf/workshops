@@ -1,0 +1,307 @@
+Initial Run:
+
+klewis@LAPTOP-A0NGHDDI:~/chef/chef-sft/workshops/2_Tomcat/kl_tomcat$ kitchen converge
+-----> Starting Test Kitchen (v3.2.2)
+-----> Creating <default-centos-7>...
+       Bringing machine 'default' up with 'virtualbox' provider...
+       ==> default: Importing base box 'bento/centos-7'...
+==> default: Matching MAC address for NAT networking...
+       ==> default: Checking if box 'bento/centos-7' version '202110.25.0' is up to date...
+       ==> default: Setting the name of the VM: kitchen-kl_tomcat-default-centos-7-26478fe0-7873-4c31-8131-b43a8994cdfb
+       ==> default: Fixed port collision for 22 => 2222. Now on port 2200.
+       ==> default: Clearing any previously set network interfaces...
+       ==> default: Preparing network interfaces based on configuration...
+           default: Adapter 1: nat
+       ==> default: Forwarding ports...
+           default: 22 (guest) => 2200 (host) (adapter 1)
+           default: 22 (guest) => 2200 (host) (adapter 1)
+       ==> default: Running 'pre-boot' VM customizations...
+       ==> default: Booting VM...
+       ==> default: Waiting for machine to boot. This may take a few minutes...
+           default: SSH address: 172.30.192.1:2200
+           default: SSH username: vagrant
+           default: SSH auth method: private key
+           default:
+           default: Vagrant insecure key detected. Vagrant will automatically replace
+           default: this with a newly generated keypair for better security.
+           default:
+           default: Inserting generated public key within guest...
+           default: Removing insecure key from the guest if it's present...
+           default: Key inserted! Disconnecting and reconnecting using new SSH key...
+       ==> default: Machine booted and ready!
+       ==> default: Checking for guest additions in VM...
+       ==> default: Setting hostname...
+       ==> default: Mounting shared folders...
+           default: /tmp/omnibus/cache => /mnt/d/Users/Kevin/.kitchen/cache
+       ==> default: Machine not provisioned because `--no-provision` is specified.
+       [SSH] Established
+       Vagrant instance <default-centos-7> created.
+       Finished creating <default-centos-7> (0m45.69s).
+-----> Converging <default-centos-7>...
+       Preparing files for transfer
+       Installing cookbooks for Policyfile /mnt/d/Users/Kevin/Documents/chef/chef-sft/workshops/2_Tomcat/kl_tomcat/Policyfile.rb using `/usr/bin/chef-cli install`
+       Installing cookbooks from lock
+       Installing kl_tomcat 0.1.0
+       Updating policy lock using `/usr/bin/chef-cli update`
+       Building policy kl_tomcat
+       Expanded run list: recipe[kl_tomcat::default]
+       Caching Cookbooks...
+       Installing kl_tomcat >= 0.0.0 from path
+
+       Lockfile written to /mnt/d/Users/Kevin/Documents/chef/chef-sft/workshops/2_Tomcat/kl_tomcat/Policyfile.lock.json
+       Policy revision id: 579a9fb4c28f470bd281ab98120b4e0df930f4d3cc4dd2ad6982c10c4103c6b5
+       Preparing dna.json
+       Exporting cookbook dependencies from Policyfile /tmp/default-centos-7-sandbox-20220124-15572-9tnvpw using `/usr/bin/chef-cli export`...
+       Exported policy 'kl_tomcat' to /tmp/default-centos-7-sandbox-20220124-15572-9tnvpw
+
+       To converge this system with the exported policy, run:
+         cd /tmp/default-centos-7-sandbox-20220124-15572-9tnvpw
+         chef-client -z
+       Removing non-cookbook files before transfer
+       Preparing validation.pem
+       Preparing client.rb
+-----> Installing Chef install only if missing package
+       Downloading https://omnitruck.chef.io/install.sh to file /tmp/install.sh
+       Trying curl...
+       Download complete.
+       el 7 x86_64
+       Getting information for chef stable  for el...
+       downloading https://omnitruck.chef.io/stable/chef/metadata?v=&p=el&pv=7&m=x86_64
+         to file /tmp/install.sh.2616/metadata.txt
+       trying curl...
+       sha1     305520305206c7c0fb5a733b1435359e7707be83
+       sha256   70d618fbf5633b9f819b5cdc9a422403bc47690ae63cc383a83462cbbd387245
+       url      https://packages.chef.io/files/stable/chef/17.9.26/el/7/chef-17.9.26-1.el7.x86_64.rpm
+       version  17.9.26
+       downloaded metadata file looks valid...
+       /tmp/omnibus/cache/chef-17.9.26-1.el7.x86_64.rpm exists
+       Comparing checksum with sha256sum...
+
+       WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING
+
+       You are installing a package without a version pin.  If you are installing
+       on production servers via an automated process this is DANGEROUS and you will
+       be upgraded without warning on new releases, even to new major releases.
+       Letting the version float is only appropriate in desktop, test, development or
+       CI/CD environments.
+
+       WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING
+
+       Installing chef
+       installing with rpm...
+       warning: /tmp/omnibus/cache/chef-17.9.26-1.el7.x86_64.rpm: Header V4 DSA/SHA1 Signature, key ID 83ef826a: NOKEY
+       Preparing...                          ################################# [100%]
+       Updating / installing...
+          1:chef-17.9.26-1.el7               ################################# [100%]
+       Thank you for installing Chef Infra Client! For help getting started visit https://learn.chef.io
+       Transferring files to <default-centos-7>
+       +---------------------------------------------+
+       ✔ 2 product licenses accepted.
+       +---------------------------------------------+
+       Chef Infra Client, version 17.9.26
+       Patents: https://www.chef.io/patents
+       Infra Phase starting
+       Creating a new client identity for default-centos-7 using the validator key.
+       Using Policyfile 'kl_tomcat' at revision '579a9fb4c28f470bd281ab98120b4e0df930f4d3cc4dd2ad6982c10c4103c6b5'
+       Resolving cookbooks for run list: ["kl_tomcat::default@0.1.0 (f4f4809)"]
+       Synchronizing cookbooks:
+         - kl_tomcat (0.1.0)
+       Installing cookbook gem dependencies:
+       Compiling cookbooks...
+       Loading Chef InSpec profile files:
+       Loading Chef InSpec input files:
+       Loading Chef InSpec waiver files:
+       Converging 9 resources
+       Recipe: kl_tomcat::install
+         * yum_package[java-1.7.0-openjdk-devel] action install
+           - install version 1:1.7.0.261-2.6.22.2.el7_8.x86_64 of package java-1.7.0-openjdk-devel
+         * group[tomcat] action create
+           - create group tomcat
+         * linux_user[tomcat] action create
+           - create user tomcat
+         * archive_file[apache-tomcat-8.5.73.tar.gz] action nothing (skipped due to action :nothing)
+         * remote_file[apache-tomcat-8.5.73.tar.gz] action create
+           - create new file /tmp/apache-tomcat-8.5.73.tar.gz
+           - update content in file /tmp/apache-tomcat-8.5.73.tar.gz from none to f89654
+           (file sizes exceed 10000000 bytes, diff output suppressed)
+           - restore selinux security context
+         * archive_file[apache-tomcat-8.5.73.tar.gz] action extract
+           - create directory /opt/tomcat
+           - extract /tmp/apache-tomcat-8.5.73.tar.gz to /opt/tomcat
+           - set owner of files extracted in /opt/tomcat to tomcat:tomcat
+         * directory[/opt/tomcat] action create
+           - change owner from 'root' to 'tomcat'
+           - change group from 'root' to 'tomcat'
+           - restore selinux security context
+         * directory[/opt/tomcat/conf] action create
+           - change mode from '0700' to '0750'
+           - restore selinux security context
+         * systemd_unit[tomcat.service] action create
+           * file[/etc/systemd/system/tomcat.service] action create
+             - create new file /etc/systemd/system/tomcat.service
+             - update content in file /etc/systemd/system/tomcat.service from none to cfd530
+             --- /etc/systemd/system/tomcat.service     2022-01-24 21:09:11.738104766 +0000
+             +++ /etc/systemd/system/.chef-tomcat20220124-2770-i6dw14.service   2022-01-24 21:09:11.591921218 +0000
+             @@ -1 +1,23 @@
+             +[Unit]
+             +Description=Apache Tomcat Web Application Container
+             +After=syslog.target network.target
+             +
+             +[Service]
+             +Type=forking
+             +Environment='JAVA_HOME=/usr/lib/jvm/jre'
+             +Environment='CATALINA_PID=/opt/tomcat/temp/tomcat.pid'
+             +Environment='CATALINA_HOME=/opt/tomcat'
+             +Environment='CATALINA_BASE=/opt/tomcat'
+             +Environment='CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC'
+             +Environment='JAVA_OPTS=-Djava.awt.headless=true -Djava.security.egd=file:/dev/./urandom'
+             +ExecStart=/opt/tomcat/bin/startup.sh
+             +ExecStop=/bin/kill -15 $MAINPID
+             +User=tomcat
+             +Group=tomcat
+             +UMask=0007
+             +RestartSec=10
+             +Restart=always
+             +
+             +[Install]
+             +WantedBy=multi-user.target
+             - change mode from '' to '0644'
+             - change owner from '' to 'root'
+             - change group from '' to 'root'
+             - restore selinux security context
+           - creating unit: tomcat.service
+         * service[tomcat] action enable
+           - enable service service[tomcat]
+         * service[tomcat] action start
+           - start service service[tomcat]
+
+       Running handlers:
+       Running handlers complete
+       Infra Phase complete, 11/12 resources updated in 41 seconds
+       Downloading files from <default-centos-7>
+       Finished converging <default-centos-7> (1m4.29s).
+-----> Test Kitchen is finished. (1m50.91s)
+
+
+Second Run:
+
+klewis@LAPTOP-A0NGHDDI:~/chef/chef-sft/workshops/2_Tomcat/kl_tomcat$ kitchen converge
+-----> Starting Test Kitchen (v3.2.2)
+-----> Converging <default-centos-7>...
+       Preparing files for transfer
+       Installing cookbooks for Policyfile /mnt/d/Users/Kevin/Documents/chef/chef-sft/workshops/2_Tomcat/kl_tomcat/Policyfile.rb using `/usr/bin/chef-cli install`
+       Installing cookbooks from lock
+       Installing kl_tomcat 0.1.0
+       Updating policy lock using `/usr/bin/chef-cli update`
+       Building policy kl_tomcat
+       Expanded run list: recipe[kl_tomcat::default]
+       Caching Cookbooks...
+       Installing kl_tomcat >= 0.0.0 from path
+
+       Lockfile written to /mnt/d/Users/Kevin/Documents/chef/chef-sft/workshops/2_Tomcat/kl_tomcat/Policyfile.lock.json
+       Policy revision id: 579a9fb4c28f470bd281ab98120b4e0df930f4d3cc4dd2ad6982c10c4103c6b5
+       Preparing dna.json
+       Exporting cookbook dependencies from Policyfile /tmp/default-centos-7-sandbox-20220124-15802-rpvn5p using `/usr/bin/chef-cli export`...
+       Exported policy 'kl_tomcat' to /tmp/default-centos-7-sandbox-20220124-15802-rpvn5p
+
+       To converge this system with the exported policy, run:
+         cd /tmp/default-centos-7-sandbox-20220124-15802-rpvn5p
+         chef-client -z
+       Removing non-cookbook files before transfer
+       Preparing validation.pem
+       Preparing client.rb
+-----> Chef installation detected (install only if missing)
+       Transferring files to <default-centos-7>
+       Chef Infra Client, version 17.9.26
+       Patents: https://www.chef.io/patents
+       Infra Phase starting
+       Using Policyfile 'kl_tomcat' at revision '579a9fb4c28f470bd281ab98120b4e0df930f4d3cc4dd2ad6982c10c4103c6b5'
+       Resolving cookbooks for run list: ["kl_tomcat::default@0.1.0 (f4f4809)"]
+       Synchronizing cookbooks:
+         - kl_tomcat (0.1.0)
+       Installing cookbook gem dependencies:
+       Compiling cookbooks...
+       Loading Chef InSpec profile files:
+       Loading Chef InSpec input files:
+       Loading Chef InSpec waiver files:
+       Converging 9 resources
+       Recipe: kl_tomcat::install
+         * yum_package[java-1.7.0-openjdk-devel] action install (up to date)
+         * group[tomcat] action create (up to date)
+         * linux_user[tomcat] action create (up to date)
+         * archive_file[apache-tomcat-8.5.73.tar.gz] action nothing (skipped due to action :nothing)
+         * remote_file[apache-tomcat-8.5.73.tar.gz] action create (up to date)
+         * directory[/opt/tomcat] action create (up to date)
+         * directory[/opt/tomcat/conf] action create (up to date)
+         * systemd_unit[tomcat.service] action create (up to date)
+         * service[tomcat] action enable (up to date)
+         * service[tomcat] action start (up to date)
+
+       Running handlers:
+       Running handlers complete
+       Infra Phase complete, 0/10 resources updated in 04 seconds
+       Downloading files from <default-centos-7>
+       Finished converging <default-centos-7> (0m17.40s).
+-----> Test Kitchen is finished. (0m18.32s)
+
+
+Third Run:
+
+klewis@LAPTOP-A0NGHDDI:~/chef/chef-sft/workshops/2_Tomcat/kl_tomcat$ kitchen converge
+-----> Starting Test Kitchen (v3.2.2)
+-----> Converging <default-centos-7>...
+       Preparing files for transfer
+       Installing cookbooks for Policyfile /mnt/d/Users/Kevin/Documents/chef/chef-sft/workshops/2_Tomcat/kl_tomcat/Policyfile.rb using `/usr/bin/chef-cli install`
+       Installing cookbooks from lock
+       Installing kl_tomcat 0.1.0
+       Updating policy lock using `/usr/bin/chef-cli update`
+       Building policy kl_tomcat
+       Expanded run list: recipe[kl_tomcat::default]
+       Caching Cookbooks...
+       Installing kl_tomcat >= 0.0.0 from path
+
+       Lockfile written to /mnt/d/Users/Kevin/Documents/chef/chef-sft/workshops/2_Tomcat/kl_tomcat/Policyfile.lock.json
+       Policy revision id: 579a9fb4c28f470bd281ab98120b4e0df930f4d3cc4dd2ad6982c10c4103c6b5
+       Preparing dna.json
+       Exporting cookbook dependencies from Policyfile /tmp/default-centos-7-sandbox-20220124-15891-lu726o using `/usr/bin/chef-cli export`...
+       Exported policy 'kl_tomcat' to /tmp/default-centos-7-sandbox-20220124-15891-lu726o
+
+       To converge this system with the exported policy, run:
+         cd /tmp/default-centos-7-sandbox-20220124-15891-lu726o
+         chef-client -z
+       Removing non-cookbook files before transfer
+       Preparing validation.pem
+       Preparing client.rb
+-----> Chef installation detected (install only if missing)
+       Transferring files to <default-centos-7>
+       Chef Infra Client, version 17.9.26
+       Patents: https://www.chef.io/patents
+       Infra Phase starting
+       Using Policyfile 'kl_tomcat' at revision '579a9fb4c28f470bd281ab98120b4e0df930f4d3cc4dd2ad6982c10c4103c6b5'
+       Resolving cookbooks for run list: ["kl_tomcat::default@0.1.0 (f4f4809)"]
+       Synchronizing cookbooks:
+         - kl_tomcat (0.1.0)
+       Installing cookbook gem dependencies:
+       Compiling cookbooks...
+       Loading Chef InSpec profile files:
+       Loading Chef InSpec input files:
+       Loading Chef InSpec waiver files:
+       Converging 9 resources
+       Recipe: kl_tomcat::install
+         * yum_package[java-1.7.0-openjdk-devel] action install (up to date)
+         * group[tomcat] action create (up to date)
+         * linux_user[tomcat] action create (up to date)
+         * archive_file[apache-tomcat-8.5.73.tar.gz] action nothing (skipped due to action :nothing)
+         * remote_file[apache-tomcat-8.5.73.tar.gz] action create (up to date)
+         * directory[/opt/tomcat] action create (up to date)
+         * directory[/opt/tomcat/conf] action create (up to date)
+         * systemd_unit[tomcat.service] action create (up to date)
+         * service[tomcat] action enable (up to date)
+         * service[tomcat] action start (up to date)
+
+       Running handlers:
+       Running handlers complete
+       Infra Phase complete, 0/10 resources updated in 04 seconds
+       Downloading files from <default-centos-7>
+       Finished converging <default-centos-7> (0m16.70s).
+-----> Test Kitchen is finished. (0m17.63s)
