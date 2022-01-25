@@ -28,3 +28,30 @@ control "disable-admin-1.0" do
     its('EnableAdminAccount') { should eq 0 }
   end
 end
+
+# Ensure Interactive logon: Do not require CTRL+ALT+DEL is Disabled
+control "disable-cad-1.0" do
+  impact 1.0
+  title "Ensure Interactive logon: Do not require CTRL+ALT+DEL is Disabled"
+  describe registry_key('HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System') do
+    its('DisableCAD') { should eq 0 }
+  end
+end
+
+# Ensure Windows NTP Client is Enabled
+control "enable-ntp_client-1.0" do
+  impact 1.0
+  title "Ensure Windows NTP Client is Enabled"
+  describe registry_key('HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\W32Time\TimeProviders\NtpClient') do
+    its('Enabled') { should eq 1 }
+  end
+end
+
+# Ensure Windows NTP Server is Disabled
+control "disable-ntp_server-1.0" do
+  impact 1.0
+  title "Ensure Windows NTP Server is Disabled"
+  describe registry_key('HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\W32Time\TimeProviders\NtpServer') do
+    its('Enabled') { should eq 0 }
+  end
+end
