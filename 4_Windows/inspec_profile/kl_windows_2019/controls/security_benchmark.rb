@@ -6,8 +6,8 @@ title "Windows Server 2019 Security Benchmark"
 control "local-logon-1.0" do
   impact 1.0
   title "Ensure Allow log on locally is set to Administrators"
-  describe security_policy do
-    its('SeInteractiveLogonRight') { should eq ['S-1-5-32-544'] }
+  describe security_policy(translate_sid: true) do
+    its('SeInteractiveLogonRight') { should eq ['BUILTIN\Administrators'] }
   end
 end
 
@@ -15,8 +15,8 @@ end
 control "remote-logon-1.0" do
   impact 1.0
   title "Ensure only Administrators and Remote Desktop users can use RDP"
-  describe security_policy do
-    its('SeRemoteInteractiveLogonRight') { should cmp ['S-1-5-32-544', 'S-1-5-32-555'] }
+  describe security_policy(translate_sid: true) do
+    its('SeRemoteInteractiveLogonRight') { should cmp ['BUILTIN\Administrators', 'BUILTIN\Remote Desktop Users'] }
   end
 end
 
@@ -40,7 +40,7 @@ end
 
 # Ensure Windows NTP Client is Enabled
 control "enable-ntp_client-1.0" do
-  impact 1.0
+  impact 0.7
   title "Ensure Windows NTP Client is Enabled"
   describe registry_key('HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\W32Time\TimeProviders\NtpClient') do
     its('Enabled') { should eq 1 }
@@ -49,7 +49,7 @@ end
 
 # Ensure Windows NTP Server is Disabled
 control "disable-ntp_server-1.0" do
-  impact 1.0
+  impact 0.7
   title "Ensure Windows NTP Server is Disabled"
   describe registry_key('HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\W32Time\TimeProviders\NtpServer') do
     its('Enabled') { should eq 0 }
