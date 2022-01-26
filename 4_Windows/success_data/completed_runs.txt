@@ -1,0 +1,185 @@
+Initial Run:
+
+D:\Users\Kevin\Documents\chef\chef-sft\workshops\4_Windows\kl_windows>kitchen converge
+-----> Starting Test Kitchen (v3.2.2)
+-----> Converging <default-windows-2019>...
+       Preparing files for transfer
+       Installing cookbooks for Policyfile D:/Users/Kevin/Documents/chef/chef-sft/workshops/4_Windows/kl_windows/Policyfile.rb using `C:\opscode\chef-workstation\bin\chef-cli.BAT install`
+       Installing cookbooks from lock
+       Installing kl_windows 0.1.0
+       Updating policy lock using `C:\opscode\chef-workstation\bin\chef-cli.BAT update`
+       Building policy kl_windows
+       Expanded run list: recipe[kl_windows::default]
+       Caching Cookbooks...
+       Installing kl_windows >= 0.0.0 from path
+
+       Lockfile written to D:/Users/Kevin/Documents/chef/chef-sft/workshops/4_Windows/kl_windows/Policyfile.lock.json
+       Policy revision id: 7f73039ead1faa0d6307cd7f865b7849cf351b8ff5b7bfb9be37d162cc3a6bca
+       Preparing dna.json
+       Exporting cookbook dependencies from Policyfile D:/Users/Kevin/Documents/MobaXterm/slash/var/log/xwin/default-windows-2019-sandbox-20220126-11728-qob4io using `C:\opscode\chef-workstati
+on\bin\chef-cli.BAT export`...
+       Exported policy 'kl_windows' to D:/Users/Kevin/Documents/MobaXterm/slash/var/log/xwin/default-windows-2019-sandbox-20220126-11728-qob4io
+
+       To converge this system with the exported policy, run:
+         cd D:/Users/Kevin/Documents/MobaXterm/slash/var/log/xwin/default-windows-2019-sandbox-20220126-11728-qob4io
+         chef-client -z
+       Removing non-cookbook files before transfer
+       Preparing validation.pem
+       Preparing client.rb
+-----> Chef installation detected (install only if missing)
+       Transferring files to <default-windows-2019>
+       Chef Infra Client, version 17.9.26
+       Patents: https://www.chef.io/patents
+       Infra Phase starting
+       Creating a new client identity for default-windows-2019 using the validator key.
+       Using Policyfile 'kl_windows' at revision '7f73039ead1faa0d6307cd7f865b7849cf351b8ff5b7bfb9be37d162cc3a6bca'
+       Resolving cookbooks for run list: ["kl_windows::default@0.1.0 (0b6e038)"]
+       Synchronizing cookbooks:
+         - kl_windows (0.1.0)
+       Installing cookbook gem dependencies:
+       Compiling cookbooks...
+       Loading Chef InSpec profile files:
+       Loading Chef InSpec input files:
+       Loading Chef InSpec waiver files:
+       Converging 6 resources
+       Recipe: kl_windows::audit
+         * windows_user_privilege[Allow logon locally] action set
+           - removing user 'BUILTIN\Backup Operators' from privilege SeInteractiveLogonRight
+           - removing user 'BUILTIN\Users' from privilege SeInteractiveLogonRight
+         * windows_user_privilege[Remote Interactive Logon] action set (up to date)
+         * windows_security_policy[EnableAdminAccount] action set
+           - update EnableAdminAccount
+           -   set secvalue to "0" (was "1")
+         * registry_key[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System] action create (up to date)
+         * registry_key[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\W32Time\TimeProviders\NtpClient] action create
+           - create key HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\W32Time\TimeProviders\NtpClient
+           - set value {:name=>"Enabled", :type=>:dword, :data=>1}
+         * registry_key[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\W32Time\TimeProviders\NtpServer] action create
+           - create key HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\W32Time\TimeProviders\NtpServer
+           - set value {:name=>"Enabled", :type=>:dword, :data=>0}
+
+       Running handlers:
+       Running handlers complete
+       Infra Phase complete, 4/6 resources updated in 48 seconds
+       Downloading files from <default-windows-2019>
+       Finished converging <default-windows-2019> (2m0.10s).
+-----> Test Kitchen is finished. (2m3.85s)
+
+
+Second Run:
+
+D:\Users\Kevin\Documents\chef\chef-sft\workshops\4_Windows\kl_windows>kitchen converge
+-----> Starting Test Kitchen (v3.2.2)
+-----> Converging <default-windows-2019>...
+       Preparing files for transfer
+       Installing cookbooks for Policyfile D:/Users/Kevin/Documents/chef/chef-sft/workshops/4_Windows/kl_windows/Policyfile.rb using `C:\opscode\chef-workstation\bin\chef-cli.BAT install`
+       Installing cookbooks from lock
+       Installing kl_windows 0.1.0
+       Updating policy lock using `C:\opscode\chef-workstation\bin\chef-cli.BAT update`
+       Building policy kl_windows
+       Expanded run list: recipe[kl_windows::default]
+       Caching Cookbooks...
+       Installing kl_windows >= 0.0.0 from path
+
+       Lockfile written to D:/Users/Kevin/Documents/chef/chef-sft/workshops/4_Windows/kl_windows/Policyfile.lock.json
+       Policy revision id: 7f73039ead1faa0d6307cd7f865b7849cf351b8ff5b7bfb9be37d162cc3a6bca
+       Preparing dna.json
+       Exporting cookbook dependencies from Policyfile D:/Users/Kevin/Documents/MobaXterm/slash/var/log/xwin/default-windows-2019-sandbox-20220126-17188-c9ekl5 using `C:\opscode\chef-workstati
+on\bin\chef-cli.BAT export`...
+       Exported policy 'kl_windows' to D:/Users/Kevin/Documents/MobaXterm/slash/var/log/xwin/default-windows-2019-sandbox-20220126-17188-c9ekl5
+
+       To converge this system with the exported policy, run:
+         cd D:/Users/Kevin/Documents/MobaXterm/slash/var/log/xwin/default-windows-2019-sandbox-20220126-17188-c9ekl5
+         chef-client -z
+       Removing non-cookbook files before transfer
+       Preparing validation.pem
+       Preparing client.rb
+-----> Chef installation detected (install only if missing)
+       Transferring files to <default-windows-2019>
+       Chef Infra Client, version 17.9.26
+       Patents: https://www.chef.io/patents
+       Infra Phase starting
+       Using Policyfile 'kl_windows' at revision '7f73039ead1faa0d6307cd7f865b7849cf351b8ff5b7bfb9be37d162cc3a6bca'
+       Resolving cookbooks for run list: ["kl_windows::default@0.1.0 (0b6e038)"]
+       Synchronizing cookbooks:
+         - kl_windows (0.1.0)
+       Installing cookbook gem dependencies:
+       Compiling cookbooks...
+       Loading Chef InSpec profile files:
+       Loading Chef InSpec input files:
+       Loading Chef InSpec waiver files:
+       Converging 6 resources
+       Recipe: kl_windows::audit
+         * windows_user_privilege[Allow logon locally] action set (up to date)
+         * windows_user_privilege[Remote Interactive Logon] action set (up to date)
+         * windows_security_policy[EnableAdminAccount] action set (up to date)
+         * registry_key[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System] action create (up to date)
+         * registry_key[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\W32Time\TimeProviders\NtpClient] action create (up to date)
+         * registry_key[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\W32Time\TimeProviders\NtpServer] action create (up to date)
+
+       Running handlers:
+       Running handlers complete
+       Infra Phase complete, 0/6 resources updated in 34 seconds
+       Downloading files from <default-windows-2019>
+       Finished converging <default-windows-2019> (1m53.73s).
+-----> Test Kitchen is finished. (1m57.43s)
+
+
+Third Run:
+
+D:\Users\Kevin\Documents\chef\chef-sft\workshops\4_Windows\kl_windows>kitchen converge
+-----> Starting Test Kitchen (v3.2.2)
+-----> Converging <default-windows-2019>...
+       Preparing files for transfer
+       Installing cookbooks for Policyfile D:/Users/Kevin/Documents/chef/chef-sft/workshops/4_Windows/kl_windows/Policyfile.rb using `C:\opscode\chef-workstation\bin\chef-cli.BAT install`
+       Installing cookbooks from lock
+       Installing kl_windows 0.1.0
+       Updating policy lock using `C:\opscode\chef-workstation\bin\chef-cli.BAT update`
+       Building policy kl_windows
+       Expanded run list: recipe[kl_windows::default]
+       Caching Cookbooks...
+       Installing kl_windows >= 0.0.0 from path
+
+       Lockfile written to D:/Users/Kevin/Documents/chef/chef-sft/workshops/4_Windows/kl_windows/Policyfile.lock.json
+       Policy revision id: 7f73039ead1faa0d6307cd7f865b7849cf351b8ff5b7bfb9be37d162cc3a6bca
+       Preparing dna.json
+       Exporting cookbook dependencies from Policyfile D:/Users/Kevin/Documents/MobaXterm/slash/var/log/xwin/default-windows-2019-sandbox-20220126-14112-co6rm9 using `C:\opscode\chef-workstati
+on\bin\chef-cli.BAT export`...
+       Exported policy 'kl_windows' to D:/Users/Kevin/Documents/MobaXterm/slash/var/log/xwin/default-windows-2019-sandbox-20220126-14112-co6rm9
+
+       To converge this system with the exported policy, run:
+         cd D:/Users/Kevin/Documents/MobaXterm/slash/var/log/xwin/default-windows-2019-sandbox-20220126-14112-co6rm9
+         chef-client -z
+       Removing non-cookbook files before transfer
+       Preparing validation.pem
+       Preparing client.rb
+-----> Chef installation detected (install only if missing)
+       Transferring files to <default-windows-2019>
+       Chef Infra Client, version 17.9.26
+       Patents: https://www.chef.io/patents
+       Infra Phase starting
+       Using Policyfile 'kl_windows' at revision '7f73039ead1faa0d6307cd7f865b7849cf351b8ff5b7bfb9be37d162cc3a6bca'
+       Resolving cookbooks for run list: ["kl_windows::default@0.1.0 (0b6e038)"]
+       Synchronizing cookbooks:
+         - kl_windows (0.1.0)
+       Installing cookbook gem dependencies:
+       Compiling cookbooks...
+       Loading Chef InSpec profile files:
+       Loading Chef InSpec input files:
+       Loading Chef InSpec waiver files:
+       Converging 6 resources
+       Recipe: kl_windows::audit
+         * windows_user_privilege[Allow logon locally] action set (up to date)
+         * windows_user_privilege[Remote Interactive Logon] action set (up to date)
+         * windows_security_policy[EnableAdminAccount] action set (up to date)
+         * registry_key[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System] action create (up to date)
+         * registry_key[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\W32Time\TimeProviders\NtpClient] action create (up to date)
+         * registry_key[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\W32Time\TimeProviders\NtpServer] action create (up to date)
+
+       Running handlers:
+       Running handlers complete
+       Infra Phase complete, 0/6 resources updated in 44 seconds
+       Downloading files from <default-windows-2019>
+       Finished converging <default-windows-2019> (2m15.37s).
+-----> Test Kitchen is finished. (2m18.97s)
+
