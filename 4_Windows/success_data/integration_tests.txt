@@ -1,0 +1,137 @@
+D:\Users\Kevin\Documents\chef\chef-sft\workshops\4_Windows\kl_windows>kitchen test
+-----> Starting Test Kitchen (v3.2.2)
+-----> Cleaning up any prior instances of <default-windows-2019>
+-----> Destroying <default-windows-2019>...
+       Finished destroying <default-windows-2019> (0m0.00s).
+-----> Testing <default-windows-2019>
+-----> Creating <default-windows-2019>...
+       Bringing machine 'default' up with 'virtualbox' provider...
+       ==> default: Importing base box 'gusztavvargadr/windows-server-2019-standard-core'...
+==> default: Matching MAC address for NAT networking...
+       ==> default: Checking if box 'gusztavvargadr/windows-server-2019-standard-core' version '1809.0.2201' is up to date...
+       ==> default: Setting the name of the VM: kitchen-kl_windows-default-windows-2019-70a511af-707b-4e5c-8fd5-b38c982808b8
+       ==> default: Clearing any previously set network interfaces...
+       ==> default: Preparing network interfaces based on configuration...
+           default: Adapter 1: nat
+       ==> default: Forwarding ports...
+           default: 3389 (guest) => 53389 (host) (adapter 1)
+           default: 5985 (guest) => 55985 (host) (adapter 1)
+           default: 5986 (guest) => 55986 (host) (adapter 1)
+           default: 22 (guest) => 2222 (host) (adapter 1)
+       ==> default: Running 'pre-boot' VM customizations...
+       ==> default: Booting VM...
+       ==> default: Waiting for machine to boot. This may take a few minutes...
+           default: WinRM address: 127.0.0.1:55985
+           default: WinRM username: vagrant
+           default: WinRM execution_time_limit: PT2H
+           default: WinRM transport: negotiate
+       ==> default: Machine booted and ready!
+       ==> default: Checking for guest additions in VM...
+           default: The guest additions on this VM do not match the installed version of
+           default: VirtualBox! In most cases this is fine, but in rare cases it can
+           default: prevent things such as shared folders from working properly. If you see
+           default: shared folder errors, please make sure the guest additions within the
+           default: virtual machine match the version of VirtualBox you have installed on
+           default: your host and reload your VM.
+           default:
+           default: Guest Additions Version: @VBOX
+           default: VirtualBox Version: 6.1
+       ==> default: Machine not provisioned because `--no-provision` is specified.
+       [WinRM] Established
+
+       Vagrant instance <default-windows-2019> created.
+       Finished creating <default-windows-2019> (5m55.10s).
+-----> Converging <default-windows-2019>...
+       Preparing files for transfer
+       Installing cookbooks for Policyfile D:/Users/Kevin/Documents/chef/chef-sft/workshops/4_Windows/kl_windows/Policyfile.rb using `C:\opscode\chef-workstation\bin\chef-cli.BAT install`
+       Installing cookbooks from lock
+       Installing kl_windows 0.1.0
+       Updating policy lock using `C:\opscode\chef-workstation\bin\chef-cli.BAT update`
+       Building policy kl_windows
+       Expanded run list: recipe[kl_windows::default]
+       Caching Cookbooks...
+       Installing kl_windows >= 0.0.0 from path
+
+       Lockfile written to D:/Users/Kevin/Documents/chef/chef-sft/workshops/4_Windows/kl_windows/Policyfile.lock.json
+       Policy revision id: 7f73039ead1faa0d6307cd7f865b7849cf351b8ff5b7bfb9be37d162cc3a6bca
+       Preparing dna.json
+       Exporting cookbook dependencies from Policyfile D:/Users/Kevin/Documents/MobaXterm/slash/var/log/xwin/default-windows-2019-sandbox-20220126-9372-z525ci using `C:\opscode\chef-workstatio
+n\bin\chef-cli.BAT export`...
+       Exported policy 'kl_windows' to D:/Users/Kevin/Documents/MobaXterm/slash/var/log/xwin/default-windows-2019-sandbox-20220126-9372-z525ci
+
+       To converge this system with the exported policy, run:
+         cd D:/Users/Kevin/Documents/MobaXterm/slash/var/log/xwin/default-windows-2019-sandbox-20220126-9372-z525ci
+         chef-client -z
+       Removing non-cookbook files before transfer
+       Preparing validation.pem
+       Preparing client.rb
+-----> Chef installation detected (install only if missing)
+       Transferring files to <default-windows-2019>
+       Chef Infra Client, version 17.9.26
+       Patents: https://www.chef.io/patents
+       Infra Phase starting
+       Creating a new client identity for default-windows-2019 using the validator key.
+       Using Policyfile 'kl_windows' at revision '7f73039ead1faa0d6307cd7f865b7849cf351b8ff5b7bfb9be37d162cc3a6bca'
+       Resolving cookbooks for run list: ["kl_windows::default@0.1.0 (0b6e038)"]
+       Synchronizing cookbooks:
+         - kl_windows (0.1.0)
+       Installing cookbook gem dependencies:
+       Compiling cookbooks...
+       Loading Chef InSpec profile files:
+       Loading Chef InSpec input files:
+       Loading Chef InSpec waiver files:
+       Converging 6 resources
+       Recipe: kl_windows::audit
+         * windows_user_privilege[Allow logon locally] action set
+           - removing user 'BUILTIN\Backup Operators' from privilege SeInteractiveLogonRight
+           - removing user 'BUILTIN\Users' from privilege SeInteractiveLogonRight
+         * windows_user_privilege[Remote Interactive Logon] action set (up to date)
+         * windows_security_policy[EnableAdminAccount] action set
+           - update EnableAdminAccount
+           -   set secvalue to "0" (was "1")
+         * registry_key[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System] action create (up to date)
+         * registry_key[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\W32Time\TimeProviders\NtpClient] action create
+           - create key HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\W32Time\TimeProviders\NtpClient
+           - set value {:name=>"Enabled", :type=>:dword, :data=>1}
+         * registry_key[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\W32Time\TimeProviders\NtpServer] action create
+           - create key HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\W32Time\TimeProviders\NtpServer
+           - set value {:name=>"Enabled", :type=>:dword, :data=>0}
+
+       Running handlers:
+       Running handlers complete
+       Infra Phase complete, 4/6 resources updated in 48 seconds
+       Downloading files from <default-windows-2019>
+       Finished converging <default-windows-2019> (2m46.87s).
+-----> Setting up <default-windows-2019>...
+       Finished setting up <default-windows-2019> (0m0.00s).
+-----> Verifying <default-windows-2019>...
+       Loaded tests from {:path=>"D:.Users.Kevin.Documents.chef.chef-sft.workshops.4_Windows.kl_windows.test.integration.default"}
+
+Profile: tests from {:path=>"D:/Users/Kevin/Documents/chef/chef-sft/workshops/4_Windows/kl_windows/test/integration/default"} (tests from {:path=>"D:.Users.Kevin.Documents.chef.chef-sft.worksh
+ops.4_Windows.kl_windows.test.integration.default"})
+Version: (not specified)
+Target:  winrm://vagrant@http://127.0.0.1:55985/wsman:3389
+
+  Security Policy
+     [PASS]  SeInteractiveLogonRight is expected to eq ["S-1-5-32-544"]
+  Security Policy
+     [PASS]  SeRemoteInteractiveLogonRight is expected to cmp == ["S-1-5-32-544", "S-1-5-32-555"]
+  Security Policy
+     [PASS]  EnableAdminAccount is expected to eq 0
+  Registry Key HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+     [PASS]  DisableCAD is expected to eq 0
+  Registry Key HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\W32Time\TimeProviders\NtpClient
+     [PASS]  Enabled is expected to eq 1
+  Registry Key HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\W32Time\TimeProviders\NtpServer
+     [PASS]  Enabled is expected to eq 0
+
+Test Summary: 6 successful, 0 failures, 0 skipped
+       Finished verifying <default-windows-2019> (0m26.74s).
+-----> Destroying <default-windows-2019>...
+       ==> default: Forcing shutdown of VM...
+       ==> default: Destroying VM and associated drives...
+       Vagrant instance <default-windows-2019> destroyed.
+       Finished destroying <default-windows-2019> (0m9.83s).
+       Finished testing <default-windows-2019> (9m18.58s).
+-----> Test Kitchen is finished. (9m21.92s)
+

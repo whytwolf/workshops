@@ -1,0 +1,78 @@
+Unremediated:
+
+D:\Users\Kevin\Documents\chef\chef-sft\workshops\4_Windows\inspec_profile\kl_windows_2019\controls>inspec exec security_benchmark.rb --backend winrm --user vagrant --password vagrant --host 12
+7.0.0.1 --port 55985
+
+Profile: tests from security_benchmark.rb (tests from security_benchmark.rb)
+Version: (not specified)
+Target:  winrm://vagrant@http://127.0.0.1:55985/wsman:3389
+
+  [FAIL]  local-logon-1.0: Ensure Allow log on locally is set to Administrators
+     [FAIL]  Security Policy SeInteractiveLogonRight is expected to eq ["BUILTIN\\Administrators"]
+
+     expected: ["BUILTIN\\Administrators"]
+          got: ["BUILTIN\\Administrators", "BUILTIN\\Users", "BUILTIN\\Backup Operators"]
+
+     (compared using ==)
+
+  [PASS]  remote-logon-1.0: Ensure only Administrators and Remote Desktop users can use RDP
+     [PASS]  Security Policy SeRemoteInteractiveLogonRight is expected to cmp == ["BUILTIN\\Administrators", "BUILTIN\\Remote Desktop Users"]
+  [FAIL]  disable-admin-1.0: Ensure the local Administrator account is disabled
+     [FAIL]  Security Policy EnableAdminAccount is expected to eq 0
+
+     expected: 0
+          got: 1
+
+     (compared using ==)
+
+  [PASS]  disable-cad-1.0: Ensure Interactive logon: Do not require CTRL+ALT+DEL is Disabled
+     [PASS]  Registry Key HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System DisableCAD is expected to eq 0
+  [FAIL]  enable-ntp_client-1.0: Ensure Windows NTP Client is Enabled
+     [FAIL]  Registry Key HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\W32Time\TimeProviders\NtpClient Enabled is expected to eq 1
+
+     expected: 1
+          got: nil
+
+     (compared using ==)
+
+  [FAIL]  disable-ntp_server-1.0: Ensure Windows NTP Server is Disabled
+     [FAIL]  Registry Key HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\W32Time\TimeProviders\NtpServer Enabled is expected to eq 0
+
+     expected: 0
+          got: nil
+
+     (compared using ==)
+
+
+
+Profile Summary: 2 successful controls, 4 control failures, 0 controls skipped
+Test Summary: 2 successful, 4 failures, 0 skipped
+
+
+
+Remediated:
+
+D:\Users\Kevin\Documents\chef\chef-sft\workshops\4_Windows\inspec_profile\kl_windows_2019\controls>inspec exec security_benchmark.rb --backend winrm --user vagrant --password vagrant --host 12
+7.0.0.1 --port 55985
+
+Profile: tests from security_benchmark.rb (tests from security_benchmark.rb)
+Version: (not specified)
+Target:  winrm://vagrant@http://127.0.0.1:55985/wsman:3389
+
+  [PASS]  local-logon-1.0: Ensure Allow log on locally is set to Administrators
+     [PASS]  Security Policy SeInteractiveLogonRight is expected to eq ["BUILTIN\\Administrators"]
+  [PASS]  remote-logon-1.0: Ensure only Administrators and Remote Desktop users can use RDP
+     [PASS]  Security Policy SeRemoteInteractiveLogonRight is expected to cmp == ["BUILTIN\\Administrators", "BUILTIN\\Remote Desktop Users"]
+  [PASS]  disable-admin-1.0: Ensure the local Administrator account is disabled
+     [PASS]  Security Policy EnableAdminAccount is expected to eq 0
+  [PASS]  disable-cad-1.0: Ensure Interactive logon: Do not require CTRL+ALT+DEL is Disabled
+     [PASS]  Registry Key HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System DisableCAD is expected to eq 0
+  [PASS]  enable-ntp_client-1.0: Ensure Windows NTP Client is Enabled
+     [PASS]  Registry Key HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\W32Time\TimeProviders\NtpClient Enabled is expected to eq 1
+  [PASS]  disable-ntp_server-1.0: Ensure Windows NTP Server is Disabled
+     [PASS]  Registry Key HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\W32Time\TimeProviders\NtpServer Enabled is expected to eq 0
+
+
+Profile Summary: 6 successful controls, 0 control failures, 0 controls skipped
+Test Summary: 6 successful, 0 failures, 0 skipped
+

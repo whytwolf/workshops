@@ -2,7 +2,7 @@
 
 # Instructions for running
 
-Download the cookbook form here: https://www.dropbox.com/s/kd5vz1wbdbju5l9/kl_tomcat.tgz?dl=0
+Download the cookbook from here: https://www.dropbox.com/s/kd5vz1wbdbju5l9/kl_tomcat.tgz?dl=0
 
 Upload the cookbook to a VM either locally or in the cloud.
 

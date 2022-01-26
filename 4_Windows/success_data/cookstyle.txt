@@ -1,0 +1,5 @@
+klewis@LAPTOP-A0NGHDDI:~/chef/chef-sft/workshops/4_Windows/kl_windows$ cookstyle
+Inspecting 8 files
+........
+
+8 files inspected, no offenses detected
